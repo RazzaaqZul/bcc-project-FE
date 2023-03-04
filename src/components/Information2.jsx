@@ -43,7 +43,7 @@ const Information2 = () => {
         </div>
       </div>
       <div>
-        <img src={image1}></img>
+        <img src={image1} className="w-[1050px] "></img>
       </div>
     </div>
   )

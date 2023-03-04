@@ -16,22 +16,22 @@ export const navLinks = [
     }
 ]
 
-export const socialMedia = [
+export const socialMedias = [
     {
         id:"social-media-1",
-        icon:{facebookIcon}
+        icon:`${facebookIcon}`
     },
     {
         id:"social-media-2",
-        icon:{instagramIcon}
+        icon:`${instagramIcon}`
     },
     {
         id:"social-media-3",
-        icon:{twitterIcon}
+        icon:`${twitterIcon}`
     },
     {
         id:"social-media-4",
-        icon:{youtubeIcon}
+        icon:`${youtubeIcon}`
     }
 ]
 
@@ -49,8 +49,8 @@ export const footerLinks = [
            {
             name:"investor",
             link:""
-           }
-        ]
+           },
+        ],
     },
     {
         links: [
@@ -65,8 +65,8 @@ export const footerLinks = [
             {
                 name:"Accessibility Statement",
                 link:""
-            }
-        ]
+            },
+        ],
     },
     {
         links: [
@@ -85,7 +85,7 @@ export const footerLinks = [
             {
                 name: "Featured Topics",
                 link:""
-            }
-        ]
-    }
-]
+            },
+        ],
+    },
+];
