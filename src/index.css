@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+ 
+
+}
+
+
+*{
+  scroll-behavior: smooth;
+  background-color: linear-gradient(258.29deg,#5E9319 -1.74%,#264400 96.29%);
+}
+
+.btn-color {
+  background-color: linear-gradient(
+    258.29deg, 
+    #5E9319 -1.74%,
+    #264400 96.29%);
+}
