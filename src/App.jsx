@@ -3,27 +3,40 @@ import './index.css';
 import './style'
 import styles from './style';
 
-import { Navbar, Hero, Footer, Button, Information1, Information2} from './components';
+import { Navbar, Hero, Footer, Button, Information2} from './components';
+import { Information1 } from './components/Information1'
+import Home from './pages/home/Home';
+import ImgSlider from './pages/home/ImgSlider';
+import Login from './pages/login/Login';
+import Register from './pages/login/Register';
+// import ProductList from './pages/Homepage/ProductList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DetailProduct from './pages/detailProduct/DetailProduct';
+const LazyAbout = React.lazy(() => import('./pages/Homepage/ProductList'))
 
 function App() {
-  return (
-   <main>
-    <div >
-      <Navbar/>
-    </div>
-    <div>
-      <Hero/>
-    </div>
-    <div>
-      <Information1/>
-    </div>
-    <div>
-      <Information2/>
-    </div>
-    <div>
-      <Footer/>
-    </div>
-   </main>
+  return ( 
+     
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Home></Home>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route 
+          exact path='/product-list' 
+          element={
+            <React.Suspense fallback='Loading'>
+              <LazyAbout/>
+            </React.Suspense>}/>
+        <Route path='/detail-product/:id' element={<DetailProduct/>}/>
+      </Routes>
+    </Router>
+
+  // // <Home></Home>
+  // // <Login></Login>
+  // // <Register/>
+  // <ProductList/>
+  // // <ImgSlider></ImgSlider>
   );
 }
 

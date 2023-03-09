@@ -4,7 +4,7 @@ import Card from './Card'
 // import axiost
 import api from '../api/posts';
 
-const Information1 = () => {
+export const Information1 = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(()=>{
@@ -50,4 +50,4 @@ const Information1 = () => {
   )
     }
 
-export default Information1
+// export default Information1

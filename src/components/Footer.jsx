@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <section>
       {/* Footer 1 */}
-      <div className='flex justify-end items-center bg-dimGreen border-b-2 border-neutral-200 gap-5 py-7 px-[120px] '>
+      <div className='flex justify-end items-center bg-dimGreen border-b-2 border-neutral-200 gap-7 py-7 px-[90px] '>
         <div className='font-bold text-white font-inter'>Follow Us</div>
-        <div className='flex flex-row gap-5 '>
+        <div className='flex flex-row gap-8 '>
           {socialMedias.map((socialMedia)=>(
             <li key={socialMedia.id} className="list-none cursor-pointer"><img src={socialMedia.icon}></img></li>
           ))}
@@ -17,7 +17,7 @@ const Footer = () => {
       </div>
 
       {/* Footer 2 */}
-      <div className='flex justify-start bg-dimGreen  text-white px-[120px] py-5 gap-40'>
+      <div className='flex justify-start bg-dimGreen  text-white py-5 px-[90px] gap-40'>
       {footerLinks.map((footerlink) => (
           <div className='p-4'>
            {footerlink.links.map((link) => (
@@ -28,7 +28,7 @@ const Footer = () => {
        
       </div>
      {/* footer 3 */}
-     <div className='flex justify-between px-[120px] bg-dimGreen py-8'>
+     <div className='flex justify-between bg-dimGreen py-8 px-[90px]'>
       <div>
         <img src={logo}></img>
       </div>

@@ -1,5 +1,5 @@
-import { Button } from "../components"
-import { instagramIcon, facebookIcon, youtubeIcon, twitterIcon } from "../assets"
+
+import { instagramIcon, facebookIcon, youtubeIcon, twitterIcon, funfact1, funfact2, funfact3, funfact4, funfact5} from "../assets"
 
 export const navLinks = [
     {
@@ -89,3 +89,27 @@ export const footerLinks = [
         ],
     },
 ];
+
+export const funfact = [
+    {
+        image: `${funfact1}`,
+        desc: "Setiap tahun, diperkirakan satu pertiga dari semua makanan yang dihasilkan di dunia (sekitar 1,3 miliar ton) terbuang percuma."
+    },
+    {
+        image: `${funfact2}`,
+        desc: "Makanan yang tidak sempurna seringkali masih segar dan bermanfaat secara nutrisi. Mereka dapat mengandung jumlah nutrisi yang sama dengan makanan yang sempurna secara visual."
+    },
+    {
+        image: `${funfact3}`,
+        desc : "Makanan yang tidak sempurna sering diabaikan meskipun masih bisa dimakan."
+    },
+    {
+        image: `${funfact4}`,
+        desc: "Makanan yang tidak sempurna seringkali dianggap lebih murah dan mudah didapat oleh orang-orang yang tinggal di daerah pedesaan atau wilayah yang kurang berkembang."
+    },
+    {
+        image: `${funfact5}`,
+        desc: 'Mengonsumsi makanan yang tidak sempurna dapat membantu mengurangi limbah pangan dan membantu petani mendapatkan nilai lebih dari hasil panen mereka'
+    },
+    
+]
