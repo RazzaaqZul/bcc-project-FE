@@ -4,7 +4,6 @@ import './style'
 import styles from './style';
 
 import { Navbar, Hero, Footer, Button, Information2} from './components';
-import { Information1 } from './components/Information1'
 import Home from './pages/home/Home';
 import ImgSlider from './pages/home/ImgSlider';
 import Login from './pages/login/Login';
@@ -12,6 +11,7 @@ import Register from './pages/login/Register';
 // import ProductList from './pages/Homepage/ProductList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DetailProduct from './pages/detailProduct/DetailProduct';
+import Cart from './pages/cart/cart';
 const LazyAbout = React.lazy(() => import('./pages/Homepage/ProductList'))
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
               <LazyAbout/>
             </React.Suspense>}/>
         <Route path='/detail-product/:id' element={<DetailProduct/>}/>
+        <Route path='/cart' element={<Cart></Cart>}/>
       </Routes>
     </Router>
 

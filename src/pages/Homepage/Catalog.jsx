@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 import { ProductContext } from '../../api/dummy'
+import { DataProductContext } from '../../api/product'
 import { Card } from '../../components'
 
 const Catalog = () => {
   const context = useContext(ProductContext)
+  const productContext = useContext(DataProductContext)
   const data = context.productList
-
+  // console.log(productContext.product)
  
   return (
    <section>

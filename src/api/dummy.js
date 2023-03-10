@@ -66,7 +66,11 @@ export function ProductProvider({children}){
                 price: 1200,
                 description: "Sayur bayam adalah jenis sayuran hijau yang sangat baik untuk kesehatan. Dengan daun berbentuk hati yang lembut dan sedikit pahit, bayam mengandung banyak nutrisi seperti vitamin A, vitamin C, vitamin K, folat, zat besi, magnesium, dan kalium. Nutrisi ini membuat bayam bermanfaat untuk menjaga kesehatan mata, tulang, dan sistem pencernaan, serta membantu melindungi tubuh dari kerusakan sel dan radikal bebas. Bayam dapat dimasak dengan berbagai cara, seperti direbus, ditumis, atau dijadikan sebagai bahan salad, dan sering dijadikan bahan utama dalam sup atau masakan sayuran lainnya. Dengan kandungan nutrisi yang tinggi dan khasiat kesehatan yang dimilikinya, sayur bayam merupakan pilihan yang baik untuk dimasukkan ke dalam menu makanan sehari-hari.",
                 idtoko: 1,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
                 namaToko: 'Dapoer Qoe',
+                produk: 27,
+                bergabung: "2 tahun lalu"
+
             },
             {
                 id: 2,
@@ -75,7 +79,10 @@ export function ProductProvider({children}){
                 price: 20000,
                 description: "Bayam dapat dimasak dengan berbagai cara, seperti direbus, ditumis, atau dijadikan sebagai bahan salad, dan sering dijadikan bahan utama dalam sup atau masakan sayuran lainnya. Dengan kandungan nutrisi yang tinggi dan khasiat kesehatan yang dimilikinya, sayur bayam merupakan pilihan yang baik untuk dimasukkan ke dalam menu makanan sehari-hari.",
                 idtoko: 2,
-                namaToko: "Farm to Table Market",
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Fresh Harvest Market",
+                produk: 123,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 3,
@@ -83,8 +90,11 @@ export function ProductProvider({children}){
                 name: "Tomat",
                 price: 10000,
                 description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi", 
-                idtoko: 1,
-                namaToko: 'Dapoer Qoe',
+                idToko: 3,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Sunshine Produce Co.",
+                produk:11,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 4,
@@ -92,8 +102,11 @@ export function ProductProvider({children}){
                 name: "Bayam",
                 price: 50000,
                 description: "Bayam merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idtoko: 4,
-                namaToko: 'Dapoer Qoe',
+                idToko: 4,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Garden Delights Emporium",
+                produk:200,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 5,
@@ -101,8 +114,11 @@ export function ProductProvider({children}){
                 name: "Mangga",
                 price: 20.000,
                 description: "Mangga arum manis yang rasanya kayak jeruk dan banyak zat besi berbahaya terkandung didalamnya",
-                idtoko: 3,
-                namaToko: 'Dapoer Qoe',
+                idToko: 5,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Farm to Table Market",
+                produk:122,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 6,
@@ -110,8 +126,11 @@ export function ProductProvider({children}){
                 name: "Tomat",
                 price: 10.000,
                 description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idtoko: 5,
+                idtoko: 1,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
                 namaToko: 'Dapoer Qoe',
+                produk: 27,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 7,
@@ -120,7 +139,10 @@ export function ProductProvider({children}){
                 price: 10000,
                 description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
                 idtoko: 2,
-                namaToko: 'Dapoer Qoe',
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Fresh Harvest Market",
+                produk: 123,
+                bergabung: "2 tahun lalu"
             },
             {
                 id: 8,
@@ -128,8 +150,11 @@ export function ProductProvider({children}){
                 name: "Tomat",
                 price: 10.000,
                 description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idtoko: 5,
-                namaToko: 'Dapoer Qoe',
+                idToko: 4,
+                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
+                namaToko: "Garden Delights Emporium",
+                produk:200,
+                bergabung: "2 tahun lalu"
             }
         ])
     },[])

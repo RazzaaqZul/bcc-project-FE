@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProductProvider } from '../../api/dummy'
+import { DataProductProvider } from '../../api/product'
 import { Footer } from '../../components'
 import NavbarLogin from '../../components/NavbarLogin'
 import styles from '../../style'
@@ -9,6 +10,7 @@ import FunFact from './FunFact'
 const ProductList = () => {
   return (
     <ProductProvider>
+      <DataProductProvider>
       <NavbarLogin></NavbarLogin>
       <div className=' font-mulish flex flex-col justify-center gap-8'>
       <div className='px-[90px]'>
@@ -18,7 +20,7 @@ const ProductList = () => {
       </div>
       <Footer></Footer>
       </div>
-    
+      </DataProductProvider>
   </ProductProvider>
 
   )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { aLogo, aLogoGreen, greenLogo, shoopingCart } from '../assets'
 import Search from './Search'
 
@@ -26,7 +27,7 @@ const [onHover, setHover] = useState(false)
                     <li><Search></Search></li>
                         <ul className='text-[15px] flex flex-row justify-center items-center gap-2'>
                             <li><img src={shoopingCart} alt='' className='w-[20px]'></img></li>
-                            <li>Keranjang</li>
+                            <li><Link to='/cart'>Keranjang</Link></li>
                         </ul>
                 </ul>
             </div>

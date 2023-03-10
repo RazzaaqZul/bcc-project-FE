@@ -28,6 +28,8 @@ import funfact5 from './funfact5.png'
 import aLogoGreen from './aLogoGreen.svg' 
 import shoopingCart from './shoopingCart.svg'
 import search from './search.svg'
+import location from './location.svg'
+import logoToko1 from './logoToko1.svg'
 
 export{
     logo,
@@ -59,6 +61,8 @@ export{
     funfact5,
     aLogoGreen,
     shoopingCart,
-    search
+    search,
+    location,
+    logoToko1
 
 }

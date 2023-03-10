@@ -31,9 +31,9 @@ const FormLogin = () => {
     //     userRef.current.focus()
     // }, [])
 
-    useEffect(()=>{
-        emailRef.current.focus() 
-    }, [])
+    // useEffect(()=>{
+    //     emailRef.current.focus() 
+    // }, [])
 
     // delete error massage 
     useEffect(()=>{
@@ -127,7 +127,7 @@ const FormLogin = () => {
                 <input 
                 type="email"
                 id="email"
-                ref={emailRef}
+                // ref={emailRef}
                 autoComplete='off'
                 onChange={(e)=> setEmail(e.target.value)}
                 value={email}
