@@ -11,7 +11,7 @@ const Catalog = () => {
  
   return (
    <section>
-    <ul className='grid grid-cols-4 gap-y-12 ' > 
+    <ul className='grid grid-cols-4 gap-y-12 max-resgrid:grid-cols-3  ' > 
         {data.map((item, i)=>(
                 <li key={i} className='m-auto' ><Card product={item}/></li>
         ))}

@@ -3,8 +3,9 @@ import AuthContext from '../../api/AuthContext'
 import ButtonAll from '../../components/ButtonAll'
 import axios from '../../api/axios'
 import {aLogoWhite, eyeClose, eyeOpen, google } from '../../assets'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import styles from '../../style'
+import ProductList from '../Homepage/ProductList'
 
 
 const LOGIN_URL='/api/v1/user/login'
@@ -75,15 +76,18 @@ const FormLogin = () => {
          } catch (err) {
             if(!err?.response){
                 setErrMsg('No Server Response')
+                setSuccess(true)
             } else if ( err.response?.status === 400) {
                 setErrMsg('Missing Username or Password')
             } else if ( err.response?.status === 401){
                 setErrMsg('Unauthorized')
             } else {
                 setErrMsg('Login Failed')
+               
             }
             // after we get an error, we need set the focus on that error display so screen reader can read that information. Thats where we had that ARIA-LIVE attribute and we set it to "assertive" so it announced immedietly
             errRef.current.focus()
+
          }
     }
 
@@ -113,10 +117,9 @@ const FormLogin = () => {
   return (
     <>
     {success ? (
-     <section>
-         <h1>SUCCESS!</h1>
-         <p>Sign In</p>
-     </section>
+   
+        <Navigate to="/product-list"></Navigate>
+  
     ) : (
 
     <div className='flex flex-col justify-center w-full font-mulish gap-5'>

@@ -5,6 +5,7 @@ import axios from '../../api/axios';
 import ButtonAll from '../../components/ButtonAll';
 import styles from '../../style';
 import { aLogoWhite, eyeClose, eyeOpen, google } from '../../assets'
+import ProductList from '../Homepage/ProductList';
 
 
 // Dimulai dari lower atau upper
@@ -105,6 +106,7 @@ const handleSubmit = async (e) =>{
             setErrMessage('Registration Failed')
         }
         errRef.current.focus()
+    
     }
 }
 // Password Hide or Show 
@@ -136,8 +138,7 @@ const eyes=() =>{
    <>
    {success ? (
     <section>
-        <h1>SUCCESS!</h1>
-        <p>Sign In</p>
+        <ProductList></ProductList>
     </section>
    ) : (
 

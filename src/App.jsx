@@ -28,7 +28,9 @@ function App() {
             <React.Suspense fallback='Loading'>
               <LazyAbout/>
             </React.Suspense>}/>
-        <Route path='/detail-product/:id' element={<DetailProduct/>}/>
+        <Route path='/detail-product/:id' element={
+      
+        <DetailProduct/>}/>
         <Route path='/cart' element={<Cart></Cart>}/>
       </Routes>
     </Router>
