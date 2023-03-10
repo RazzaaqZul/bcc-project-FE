@@ -7,21 +7,21 @@ import { Link } from 'react-router-dom'
 import styles from '../../style'
 
 
-const LOGIN_URL='/auth'
+const LOGIN_URL='/api/v1/user/login'
 
 const FormLogin = () => {
     // set Auth
     const { setAuth } = useContext(AuthContext)
 
     // for set the focus
-    const userRef = useRef()
+    // const userRef = useRef()
     const errRef = useRef()
-    const emailRef = useRef()
-    const buttRef = useRef()
+    // const emailRef = useRef()
+    // const buttRef = useRef()
     // state username and password
-    const [username, setUsername] = useState('')
+    const [usernameOrEmail, setUsernameOrEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
+   
 
     // error message
     const [errMsg, setErrMsg] = useState('');
@@ -38,7 +38,7 @@ const FormLogin = () => {
     // delete error massage 
     useEffect(()=>{
         setErrMsg('')
-    }, [email, password])
+    }, [usernameOrEmail, password])
 
     // handleSubmit 
     const handleSubmit = async (e) => {
@@ -52,24 +52,25 @@ const FormLogin = () => {
             }, 2000)
  
          try {
-            const response = await axios.post( LOGIN_URL, JSON.stringify({username, password}),{
+            const response = await axios.post( LOGIN_URL, JSON.stringify({username: usernameOrEmail, password}),{
                 headers: {'Content-Type': 'application/json'},
                 withCredentials: true
             })
+            console.log(response.data)
+            console.log(response)
             // get is the acces token, we want store it with the other user informatiion
             const accessToken = response?.data?.accessToken;
             // role
             const roles = response?.data?.roles;
             // store all these information inside our auth object and that's saved in the global context
             setAuth({
-                username,
+                usernameOrEmail,
                 password,
-                email,
                 roles, 
                 accessToken
             })
             setPassword('')
-            setEmail('')
+            setUsernameOrEmail('')
             setSuccess(true)
          } catch (err) {
             if(!err?.response){
@@ -89,7 +90,7 @@ const FormLogin = () => {
   const [type,setType] = useState("password")
 
    const hidePassword=()=>{
-        if(type == "password"){
+        if(type === "password"){
             setType("text")
         } else {
             setType("password")
@@ -97,11 +98,11 @@ const FormLogin = () => {
    }
 
    const eyes=() =>{
-    if(type == "password"){
-        return <img src={eyeClose}/>
+    if(type === "password"){
+        return <img src={eyeClose} alt='eyes-close'/>
      
     } else {
-        return <img src={eyeOpen}/>
+        return <img src={eyeOpen} alt='eyes-open'/>
     }
    }
 
@@ -110,6 +111,14 @@ const FormLogin = () => {
   
 
   return (
+    <>
+    {success ? (
+     <section>
+         <h1>SUCCESS!</h1>
+         <p>Sign In</p>
+     </section>
+    ) : (
+
     <div className='flex flex-col justify-center w-full font-mulish gap-5'>
         <div>
             <h1 className='text-dimGreen text-[35px] font-bold'>Masuk sebagai Pembeli</h1>
@@ -121,18 +130,18 @@ const FormLogin = () => {
         <div>
             <form onSubmit={handleSubmit} className='flex flex-col justify-start gap-6'>
             <div className='flex flex-col'>
-                <label htmlFor='email' className='font-bold'>
-                    Email
+                <label htmlFor='usernameOrEmail' className='font-bold'>
+                    Email atau Username
                 </label>
                 <input 
-                type="email"
-                id="email"
+                type="text"
+                id="usernameOrEmail"
                 // ref={emailRef}
                 autoComplete='off'
-                onChange={(e)=> setEmail(e.target.value)}
-                value={email}
+                onChange={(e)=> setUsernameOrEmail(e.target.value)}
+                value={usernameOrEmail}
                 required
-                className={`${styles.emailInput}`}
+                className={`${styles.input}`}
                 />
          
             {/*  */}
@@ -159,25 +168,27 @@ const FormLogin = () => {
             </div>
             <div className='flex flex-col gap-2 '>
                 <div>
-                <ButtonAll >{loading ? <img src={aLogoWhite} className='animate-spin w-6 mx-auto'/>: `Masuk`}</ButtonAll>
+                <ButtonAll >{loading ? <img src={aLogoWhite} alt='white-logo' className='animate-spin w-6 mx-auto'/>: `Masuk`}</ButtonAll>
 
 
                 
 
                 </div>
                 <p className='font-bold flex justify-center items-center'>atau</p>
-               <button className='text-black border-2 border-dimGreen  tracking-widest bg-white font-[700] text-[13px] py-[8px] px-[12px] w-full rounded-3xl flex flex-row gap-3 items-center justify-center '><img src={google} className='w-[20px]'/>MASUK MENGGUNAKAN GOOGLE</button>
+               <button className='text-black border-2 border-dimGreen  tracking-widest bg-white font-[700] text-[13px] py-[8px] px-[12px] w-full rounded-3xl flex flex-row gap-3 items-center justify-center '><img src={google} className='w-[20px]' alt='google-logo'/>MASUK MENGGUNAKAN GOOGLE</button>
             </div>
             </form>
 
            
 
-            <p className='py-5 font-semibold text-[15px] flex justify-center '>Belum buat akun?  <a className='font-bold text-dimGreen underline' href=''><Link to={'/register'}>Daftar</Link></a></p>
+            <p className='py-5 font-semibold text-[15px] flex justify-center '>Belum buat akun? <Link to={'/register'}>Daftar</Link></p>
 
         </div>
 
       
     </div>
+    )}
+  </>
   )
 }
 

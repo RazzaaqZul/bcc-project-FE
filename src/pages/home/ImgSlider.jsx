@@ -28,8 +28,6 @@ const ImgSlider = () => {
         for(let i = 0; i < imageSlides.length ; i++){
             setTimeout(()=>{
                 const nextSlide = () => { 
-                    console.log(i)
-                    console.log(currentIndex)
                     const isLastSlide =currentIndex === imageSlides.length -1 
                     const newIndex = isLastSlide ? 0 : currentIndex + 1
                     setCurrentIndex(newIndex)

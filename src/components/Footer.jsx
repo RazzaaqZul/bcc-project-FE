@@ -10,18 +10,19 @@ const Footer = () => {
       <div className='flex justify-end items-center bg-dimGreen border-b-2 border-neutral-200 gap-7 py-7 px-[90px] '>
         <div className='font-bold text-white font-inter'>Follow Us</div>
         <div className='flex flex-row gap-8 '>
-          {socialMedias.map((socialMedia)=>(
-            <li key={socialMedia.id} className="list-none cursor-pointer"><img src={socialMedia.icon}></img></li>
+          {socialMedias.map((socialMedia,i)=>(
+            <li key={`social-media-key-${i}`} className="list-none cursor-pointer">
+            <img src={socialMedia.icon}></img></li>
           ))}
         </div>
       </div>
 
       {/* Footer 2 */}
       <div className='flex justify-start bg-dimGreen  text-white py-5 px-[90px] gap-40'>
-      {footerLinks.map((footerlink) => (
-          <div className='p-4'>
-           {footerlink.links.map((link) => (
-            <li key={link.name} className='list-none my-1 font-inter cursor-pointer'>{link.name}</li>
+      {footerLinks.map((footerlink,i) => (
+          <div key={`footer-link-key-${i}`}className='p-4'>
+           {footerlink.links.map((link,i) => (
+            <li key={`link-key-${i}`} className='list-none my-1 font-inter cursor-pointer'>{link.name}</li>
           ))}
           </div>
         ))}

@@ -11,7 +11,7 @@ export function DataProductProvider ({children}){
     useEffect(()=>{
         const fetchProduct = async() => {
             try {
-                const response = await axios.get('/seller/login')
+                const response = await axios.get('/api/v1/user/login')
                 console.log(response)
                 setProduct(response.data)
             } catch (err){

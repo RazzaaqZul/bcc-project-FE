@@ -25,7 +25,7 @@ const FormRegisterPembeli = () => {
   const [fname, setFname] = useState('')
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
-  const [gender, setGender] = useState(false)
+  const [gender, setGender] = useState('')
   const [address, setAddress] = useState('')
   const [contact, setContact] = useState('')
 
@@ -47,16 +47,16 @@ const [success, setSuccess] = useState(false)
 const [validUserName, setValidUserName] = useState(false)
 useEffect(()=>{
     const result = USERNAME_REGEX.test(username)
-    console.log(result)
-    console.log(username)
+    // console.log(result)
+    // console.log(username)
     setValidUserName(result)
 },[username])
 
 // Validasi password ketika password di inputkan
 useEffect(()=>{
     const result = PWD_REGEX.test(password)
-    console.log(result)
-    console.log(password)
+    // console.log(result)
+    // console.log(password)
     setValidPassword(result)
 
     // password disandingkan dengan matchPassword
@@ -112,7 +112,7 @@ const handleSubmit = async (e) =>{
 const [type,setType] = useState("password")
 
 const hidePassword=()=>{
-     if(type == "password"){
+     if(type === "password"){
          setType("text")
      } else {
          setType("password")
@@ -121,11 +121,11 @@ const hidePassword=()=>{
 
 
 const eyes=() =>{
-    if(type == "password"){
-        return <img src={eyeClose}/>
+    if(type === "password"){
+        return <img src={eyeClose} alt='eyes-close'/>
      
     } else {
-        return <img src={eyeOpen}/>
+        return <img src={eyeOpen} alt='eyes-open'/>
     }
    }
 
@@ -137,7 +137,7 @@ const eyes=() =>{
    {success ? (
     <section>
         <h1>SUCCESS!</h1>
-        <p><a href='#'>Sign In</a></p>
+        <p>Sign In</p>
     </section>
    ) : (
 
@@ -315,14 +315,32 @@ const eyes=() =>{
                  />
             </div>
 
+            {/* Gender */}
+            <div className='flex flex-col'>
+                <label htmlFor='Address'>
+                   Gender*
+                </label>
+                <select name="gender" className={`${styles.input}`}>
+                    <option value={gender} onClick={()=>{
+                        setGender("Laki-Laki")
+                    }}>Laki-Laki</option>
+                    <option value={gender} onClick={()=>{
+                        setGender("Perempuan")
+                        console.log(gender)
+                    }}>
+                        Perempuan
+                    </option>
+                </select>
+            </div>
+
             {/* Contact */}
             <div>
-                <label htmlFor='Address'>
+                <label htmlFor='Contact'>
                     Nomor Telepon*
                 </label>
                 <input 
                      type='number'
-                     id='fullname'
+                     id='Contact'
                      autoComplete='off'
                      onChange={(e) => setContact(e.target.value)}
                      required
@@ -340,18 +358,18 @@ const eyes=() =>{
                     MASUK
                 </ButtonAll> */}
 
-                <ButtonAll >{loading ? <img src={aLogoWhite} className='animate-spin w-6 mx-auto'/>: `DAFTAR`}</ButtonAll>
+                <ButtonAll >{loading ? <img src={aLogoWhite} className='animate-spin w-6 mx-auto'alt='logo-white'/>: `DAFTAR`}</ButtonAll>
                 
                 <p className='font-bold flex justify-center items-center'>atau</p>
                     
-                <button className='text-black border-2 border-dimGreen  tracking-widest bg-white font-[700] text-[13px] py-[8px] px-[12px] w-full rounded-3xl flex flex-row gap-3 items-center justify-center '><img src={google} className='w-[20px]'/>MASUK MENGGUNAKAN GOOGLE</button>
+                <button className='text-black border-2 border-dimGreen  tracking-widest bg-white font-[700] text-[13px] py-[8px] px-[12px] w-full rounded-3xl flex flex-row gap-3 items-center justify-center '><img src={google} className='w-[20px]' alt='logo-google'/>MASUK MENGGUNAKAN GOOGLE</button>
               
             </div>
 
         </form>
 
 
-            <p className='py-5 font-semibold text-[15px] flex justify-center '>Sudah punya akun? <a className='font-bold text-dimGreen underline' href=''>Masuk</a></p>
+            <p className='py-5 font-semibold text-[15px] flex justify-center '>Sudah punya akun? <a className='font-bold text-dimGreen underline' href='/'>Masuk</a></p>
 
         </div>
     </section>

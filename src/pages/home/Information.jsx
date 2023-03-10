@@ -25,7 +25,7 @@ const Information = () => {
         {randomData.map((item, i)=>(
                 <li key={`product-random-id-${i}`} ><Card product={item}/></li>
         ))}
-        <li><img src={continueButton} class="cursor-pointer"/></li>
+        <li><img src={continueButton} className="cursor-pointer"/></li>
 
         </ul>
       </div>
