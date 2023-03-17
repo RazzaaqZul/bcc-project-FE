@@ -6,6 +6,8 @@ import ButtonAll from '../../components/ButtonAll';
 import styles from '../../style';
 import { aLogoWhite, eyeClose, eyeOpen, google } from '../../assets'
 import ProductList from '../Homepage/ProductList';
+import { Navigate } from 'react-router-dom';
+import axiosInstance from '../../api/axios';
 
 
 // Dimulai dari lower atau upper
@@ -17,7 +19,7 @@ const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 // end point untuk Backend
-const REGISTER_URL = '/register'
+const REGISTER_URL = '/api/v1/user/signup'
 
 const FormRegisterPembeli = () => {
   const errRef = useRef()
@@ -25,8 +27,8 @@ const FormRegisterPembeli = () => {
 //   Data User Register
   const [fname, setFname] = useState('')
   const [email, setEmail] = useState('')
-  const [username, setUsername] = useState('')
   const [gender, setGender] = useState('')
+  const [username, setUsername] = useState('')
   const [address, setAddress] = useState('')
   const [contact, setContact] = useState('')
 
@@ -48,16 +50,12 @@ const [success, setSuccess] = useState(false)
 const [validUserName, setValidUserName] = useState(false)
 useEffect(()=>{
     const result = USERNAME_REGEX.test(username)
-    // console.log(result)
-    // console.log(username)
     setValidUserName(result)
 },[username])
 
 // Validasi password ketika password di inputkan
 useEffect(()=>{
     const result = PWD_REGEX.test(password)
-    // console.log(result)
-    // console.log(password)
     setValidPassword(result)
 
     // password disandingkan dengan matchPassword
@@ -83,14 +81,14 @@ const handleSubmit = async (e) =>{
     setTimeout(()=>{
         setLoading(false)
     }, 2000)
-
+    
 
     try{
-        const response = await axios.post(
-            REGISTER_URL, JSON.stringify({fname, email, username, gender, password, address, contact}),
+
+        const response = await axios.post('https://gedeindra.aenzt.tech/api/v1/user/signup',JSON.stringify({fname, email, username, gender:"male", password, address, contact}),
             {
                 headers: {'Content-Type':'application/json'},
-                withCredentials: true
+                
             }
         )
         console.log(response.data)
@@ -99,7 +97,7 @@ const handleSubmit = async (e) =>{
         setSuccess(true)
     } catch (err){
         if(!err?.response) {
-            setErrMessage('Duh belum connect ke BE nich')
+            setErrMessage(err.message)
         } else if (err.response?.status === 409){
             setErrMessage('Username Taken')
         } else {
@@ -137,9 +135,7 @@ const eyes=() =>{
     return (
    <>
    {success ? (
-    <section>
-        <ProductList></ProductList>
-    </section>
+   <Navigate to='/login'/>
    ) : (
 
     <section >
@@ -155,12 +151,13 @@ const eyes=() =>{
         <form onSubmit={handleSubmit} className='flex flex-col gap-2 font-bold'>
             {/* FULL NAME (1) */}
             <div>
-            <label htmlFor='fullname'>
+            <label htmlFor='fname'>
                 Nama Lengkap* 
             </label>
             <input 
                 type='text'
-                id='fullname'
+                id='fname'
+                name='fname'
                 autoComplete='off'
                 onChange={(e) => setFname(e.target.value)}
                 required
@@ -177,6 +174,7 @@ const eyes=() =>{
                 <input 
                     type='email'
                     id='email'
+                    name='email'
                     autoComplete='off'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -198,6 +196,7 @@ const eyes=() =>{
                 <input
                     type='text'
                     id='username'
+                    name='username'
                     autoComplete='off'
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -232,6 +231,7 @@ const eyes=() =>{
                     <input
                         type={type}
                         id='password'
+                        name='password'
                         onChange={(e) =>setPassword(e.target.value)}
                         required
                         aria-invalid={validPassword ? 'false' : 'true'}
@@ -302,12 +302,13 @@ const eyes=() =>{
             
             {/* Address (6) */}
             <div>
-                <label htmlFor='Address'>
+                <label htmlFor='address'>
                     Address: 
                 </label>
                 <input 
                      type='text'
-                     id='Address'
+                     id='address'
+                     name='address'
                      autoComplete='off'
                      onChange={(e) => setAddress(e.target.value)}
                      required
@@ -316,32 +317,33 @@ const eyes=() =>{
                  />
             </div>
 
-            {/* Gender */}
+            {/* Gender
             <div className='flex flex-col'>
                 <label htmlFor='Address'>
                    Gender*
                 </label>
-                <select name="gender" className={`${styles.input}`}>
-                    <option value={gender} onClick={()=>{
+                <select  className={`${styles.input}`}>
+                    <option value={gender}  onClick={()=>{
                         setGender("Laki-Laki")
                     }}>Laki-Laki</option>
-                    <option value={gender} onClick={()=>{
+                    <option value={gender}  onClick={()=>{
                         setGender("Perempuan")
                         console.log(gender)
                     }}>
                         Perempuan
                     </option>
                 </select>
-            </div>
+            </div> */}
 
             {/* Contact */}
             <div>
-                <label htmlFor='Contact'>
+                <label htmlFor='contact'>
                     Nomor Telepon*
                 </label>
                 <input 
                      type='number'
-                     id='Contact'
+                     id='contact'
+                     name='contact'
                      autoComplete='off'
                      onChange={(e) => setContact(e.target.value)}
                      required
@@ -360,17 +362,13 @@ const eyes=() =>{
                 </ButtonAll> */}
 
                 <ButtonAll >{loading ? <img src={aLogoWhite} className='animate-spin w-6 mx-auto'alt='logo-white'/>: `DAFTAR`}</ButtonAll>
-                
-                <p className='font-bold flex justify-center items-center'>atau</p>
-                    
-                <button className='text-black border-2 border-dimGreen  tracking-widest bg-white font-[700] text-[13px] py-[8px] px-[12px] w-full rounded-3xl flex flex-row gap-3 items-center justify-center '><img src={google} className='w-[20px]' alt='logo-google'/>MASUK MENGGUNAKAN GOOGLE</button>
               
             </div>
 
         </form>
 
 
-            <p className='py-5 font-semibold text-[15px] flex justify-center '>Sudah punya akun? <a className='font-bold text-dimGreen underline' href='/'>Masuk</a></p>
+            <p className='py-5 font-semibold text-[15px] flex justify-center '>Sudah punya akun? <a className='font-bold text-dimGreen underline' href='/login'>Masuk</a></p>
 
         </div>
     </section>

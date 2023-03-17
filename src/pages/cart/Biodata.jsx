@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import AuthContext from '../../api/AuthContext'
 import styles from '../../style'
 
 const Biodata = () => {
-
-    const [fname, setFname] = useState('')
-    const [contact, setContact] = useState('')
-    const [email, setEmail] = useState('')
-    const [city, setCity] = useState('')
-    const [address, setAddress] = useState('')
+    const { setAuth, auth } = useContext(AuthContext)
+    const [fname, setFname] = useState(auth.fname)
+    const [contact, setContact] = useState(auth.contact)
+    const [email, setEmail] = useState(auth.email)
+    const [city, setCity] = useState('Malang')
+    const [address, setAddress] = useState(auth.address)
 
   return (
     <section className='flex flex-col font-mulish'>

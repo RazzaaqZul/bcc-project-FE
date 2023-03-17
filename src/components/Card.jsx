@@ -6,15 +6,15 @@ import { brokoli } from '../assets'
 import ButtonAll from './ButtonAll'
 
 const Card = ({product}) => {
- 
+  
   return (
-    <div className='bg-white flex flex-col w-[320px] gap-2 font-inter'>
+    <div className='bg-white hover:scale-105 duration-300 flex flex-col w-[320px] gap-2 font-inter'>
         <div className='bg-slate-200 flex justify-center items-center'>
-            <img src={brokoli} className="h-20px w-[250px] p-[30px]"></img>
+            <img src={product.product_image} className=" w-[500px] h-[290px] "></img>
         </div>
         <div className='flex justify-between items-center '>
             <div className='text-neutral70 text-[15px] font-[600]'>
-               {product.category}
+               {product.category.Name}
             </div>
             <div className='font-semibold text-neutral100 text-[25px] gap-14'>
             <CurrencyFormat
@@ -30,10 +30,14 @@ const Card = ({product}) => {
         </div>
 
         <div className='text-neutral100 font-bold text-[18px] leading-[120%]' >
-            <p>{product.namaToko}</p>
+            <p>{product.seller.shop}</p>
+        </div>
+
+        <div className='text-neutral100 font-bold text-[18px] leading-[120%]' >
+            <p>{product.stock}</p>
         </div>
         <div>
-        <ButtonAll><Link to={`/detail-product/${product.id}`}>TAMBAHKAN KE KERANJANG</Link></ButtonAll>
+        <ButtonAll><Link to={`/detail-product/${product.ID}`}>TAMBAHKAN KE KERANJANG</Link></ButtonAll>
         </div>
       
     </div>

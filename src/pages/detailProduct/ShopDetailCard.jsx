@@ -9,14 +9,14 @@ const ShopDetailCard = ({product}) => {
                 <img src={logoToko1} className='rounded-[500%] bg-sky-300 w-[60px]' alt=''></img>
             </div>
             <div className=' basis-[40%] flex flex-col gap-2'>
-                <h1 className='text-[15px] font-extrabold'>{product.namaToko}</h1>
+                <h1 className='text-[15px] font-extrabold'>{product.seller.shop}</h1>
                 <div className='flex flex-row text-[13px]'>
                     <p className='basis-1/2 font-medium '>Produk</p>
-                    <p className='basis-1/2 font-extrabold'>{product.produk}</p>
+                    <p className='basis-1/2 font-extrabold'>{product.stock}</p>
                 </div>
                 <div className='flex flex-row text-[13px]'>
                     <p className='basis-1/2 font-medium '>Bergabung</p>
-                    <p className='basis-1/2 font-extrabold'>{product.bergabung}</p>
+                    <p className='basis-1/2 font-extrabold'>bergabung</p>
                 </div>
             </div>
             <div className='basis-[45%] h-fit  flex flex-row border-[1px] p-2 ml-14 border-green80 rounded-3xl justify-center gap-2'>

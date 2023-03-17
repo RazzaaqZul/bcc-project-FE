@@ -15,7 +15,7 @@ const Hero = () => {
                 <h2 className='text-dimGreen font-bold font-mulish text-[40px] leading-[50px]'>Food Loss Bukan Sampah,<br/>Tetapi Sumber Keberlanjutan</h2>
                 <p className='font-inter font-[650] text-[14px]'>Menerapkan hemat makanan dengan mengurangi food waste dapat membantu melindungi lingkungan dari dampak negatif limbah makanan.</p>
                 <div className=' '>
-                <ButtonAll><Link to={'/product-list'}>MULAI</Link></ButtonAll>
+                <ButtonAll><Link to={'/login'}>MULAI</Link></ButtonAll>
                 </div>
             </div>
                 <div className='bg-gradientWhiteLR from-indigo-500 flex justify-center items-center basis-[50%] min-h-screen min-w-fit'>

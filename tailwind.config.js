@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html", "./src/**/*.{js,jsx}",
+   
+  ],
   mode: "jit",
   theme: {
     extend: {
@@ -29,13 +32,18 @@ module.exports = {
         neutral100: "rgba(17, 24, 39, 1)",
         neutral70: "rgba(93, 99, 113, 1)",
         neutral10: "rgba(253, 253, 253, 1)",
+        neutral20: "rgba(225, 227, 230, 1)",
         green90: "rgba(38, 68, 0, 1)",
         green80: "rgba(67, 112, 8, 1)",
         green60: "rgba(120, 168, 58, 1)",
         green40: "rgba(172, 206, 128, 1)",
         green30: "rgba(198, 223, 166, 1)",
         green20: "rgba(223, 238, 204, 1)",
-        green10: "rgba(249, 252, 245, 1)"
+        green10: "rgba(249, 252, 245, 1)",
+        warning: "rgba(236, 212, 4, 1)",
+        postive: "rgba(6, 151, 110, 1)",
+        negative: "rgba(232, 76, 61, 1)"
+
         
       },      
       fontFamily: {

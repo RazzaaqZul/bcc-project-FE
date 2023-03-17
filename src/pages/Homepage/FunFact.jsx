@@ -15,11 +15,11 @@ const FunFact = () => {
 
     }
 
-    const prevSlide = () => {
-        const isFirstSlide = currentIndex === 0
-        const newIndex = isFirstSlide ? funfact.length-1 : currentIndex -1
-        setCurrentIndex(newIndex)
-    }
+    // const prevSlide = () => {
+    //     const isFirstSlide = currentIndex === 0
+    //     const newIndex = isFirstSlide ? funfact.length-1 : currentIndex -1
+    //     setCurrentIndex(newIndex)
+    // }
     const nextSlide = () => { 
         const isLastSlide =currentIndex === funfact.length -1 
         const newIndex = isLastSlide ? 0 : currentIndex + 1
@@ -43,7 +43,7 @@ const FunFact = () => {
   return (
     <section >
 
-    <div className={`max-sm:h-[550px] h-[370px] relative flex flex-col  bg-white rounded-2xl shadow-[0_40px_70px_-20px_rgba(0,0,0,0.4)]  w-full`}>
+    <div className={`max-sm:h-[550px] h-[370px] mt-12 relative flex flex-col  bg-white rounded-2xl shadow-[0_40px_70px_-20px_rgba(0,0,0,0.4)]  w-full`}>
         {/* Image Here to display */}
         <div style={{ backgroundImage: `url(${funfact[currentIndex].image})`}} className='w-full h-60 bg-center bg-cover duration-700 rounded-t-2xl '>
         </div>

@@ -6,14 +6,16 @@ import {aLogoWhite, eyeClose, eyeOpen, google } from '../../assets'
 import { Link, Navigate } from 'react-router-dom'
 import styles from '../../style'
 import ProductList from '../Homepage/ProductList'
+import { data } from 'autoprefixer'
+import axiosInstance from '../../api/axios'
 
 
-const LOGIN_URL='/api/v1/user/login'
+const LOGIN_URL='api/v1/user/market/products/1'
 
 const FormLogin = () => {
     // set Auth
-    const { setAuth } = useContext(AuthContext)
-
+    const { setAuth, auth } = useContext(AuthContext)
+    const [dapet,setDapet] = useState([])
     // for set the focus
     // const userRef = useRef()
     const errRef = useRef()
@@ -26,6 +28,10 @@ const FormLogin = () => {
 
     // error message
     const [errMsg, setErrMsg] = useState('');
+    const [forms, setForms] = useState({
+        email: '',
+        password: ''
+    })
     const [success, setSuccess] = useState(false);
 
     // useEffect(()=>{
@@ -53,30 +59,56 @@ const FormLogin = () => {
             }, 2000)
  
          try {
-            const response = await axios.post( LOGIN_URL, JSON.stringify({username: usernameOrEmail, password}),{
-                headers: {'Content-Type': 'application/json'},
-                withCredentials: true
-            })
-            console.log(response.data)
-            console.log(response)
-            // get is the acces token, we want store it with the other user informatiion
-            const accessToken = response?.data?.accessToken;
-            // role
-            const roles = response?.data?.roles;
+            const response = await axiosInstance.post("/api/v1/user/login",JSON.stringify({username: usernameOrEmail, password}),
+            // {
+            //     // headers: { 'Content-Type': 'application/json'},
+            //     // withCredentials: true
+            // }
+            )
+           
+            const accessToken = response?.data?.message;
+            console.log(response?.data?.message)
+            const data = response?.data?.data
+            console.log(data)
+
+            const createdAt = data.CreatedAt
+            console.log(createdAt)
+            const deletedAt = data.deletedAt
+            const id = data.ID
+            const updatedAt = data.UpdatedAt
+            const address = data.address
+            const contact = data.contact
+            const email = data.email
+            const fname = data.fname
+            const gender = data.gender
+            const user_image = data.user_image
+            const username = data.username
+            localStorage.setItem('Authorization', accessToken)
+        
             // store all these information inside our auth object and that's saved in the global context
             setAuth({
-                usernameOrEmail,
-                password,
-                roles, 
-                accessToken
+              createdAt,
+              deletedAt,
+              id,
+              updatedAt,
+              address,
+              contact,
+              email,
+              fname,
+              gender,
+              user_image, 
+              username, 
+              password
             })
+            console.log(auth)
             setPassword('')
             setUsernameOrEmail('')
             setSuccess(true)
          } catch (err) {
+            console.log(err)
             if(!err?.response){
-                setErrMsg('No Server Response')
-                setSuccess(true)
+                setErrMsg(err.message)
+                console.log(err.message)
             } else if ( err.response?.status === 400) {
                 setErrMsg('Missing Username or Password')
             } else if ( err.response?.status === 401){
@@ -119,6 +151,7 @@ const FormLogin = () => {
     {success ? (
    
         <Navigate to="/product-list"></Navigate>
+        
   
     ) : (
 
@@ -140,6 +173,7 @@ const FormLogin = () => {
                 type="text"
                 id="usernameOrEmail"
                 // ref={emailRef}
+                name='username'
                 autoComplete='off'
                 onChange={(e)=> setUsernameOrEmail(e.target.value)}
                 value={usernameOrEmail}
@@ -158,6 +192,7 @@ const FormLogin = () => {
                 type = {type}
                 id = 'password'
                 onChange={(e)=> setPassword(e.target.value)}
+                name="password"
                 value = {password}
                 required
                 className= {`${styles.input}`}

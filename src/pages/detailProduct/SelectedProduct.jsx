@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext } from 'react'
 import { ProductContext } from '../../api/dummy'
-import { brokoli } from '../../assets'
-import NavbarLogin from '../../components/NavbarLogin'
 import Content from './Content'
 
 
@@ -10,10 +7,11 @@ import Content from './Content'
 const SelectedProduct = ({id}) => {
   const context = useContext(ProductContext)
   const product = context.productList
-  const currentId = id
+  console.log(id)
   return (
 
-    <Content response={product} id={currentId}></Content>
+      <Content products={product} id={id}></Content>
+
   )
 }
 

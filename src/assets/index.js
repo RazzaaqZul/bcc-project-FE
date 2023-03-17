@@ -30,6 +30,16 @@ import shoopingCart from './shoopingCart.svg'
 import search from './search.svg'
 import location from './location.svg'
 import logoToko1 from './logoToko1.svg'
+import riwayatlogo from './riwayatlogo.svg'
+import fotoProfil from './fotoProfil.png'
+import imgInformation3 from './imgInformation3.png'
+import defaultProfil from './defaultProfil.png'
+import pana from './pana.png'
+import csLogo from './csLogo.svg'
+import product_1 from './product_1.png'
+import product_2 from './product_2.png'
+import product_3 from './product_3.png'
+
 
 export{
     logo,
@@ -63,6 +73,14 @@ export{
     shoopingCart,
     search,
     location,
-    logoToko1
-
+    logoToko1,
+    riwayatlogo,
+    fotoProfil,
+    imgInformation3,
+    defaultProfil,
+    pana,
+    csLogo,
+    product_1,
+    product_2,
+    product_3
 }

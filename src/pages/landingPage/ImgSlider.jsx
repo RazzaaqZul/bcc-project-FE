@@ -4,6 +4,8 @@ import { img1, img2, img3 } from '../../assets'
 const ImgSlider = () => {
     
         // Import Image 
+
+        
     const imageSlides = [
         {
             img: img1
@@ -41,7 +43,7 @@ const ImgSlider = () => {
   return (
     <div className='max-w-[1400px] h-[580px] w-full m-auto py-16  relative'>
         {/* Image Here to display */}
-        <div style={{ backgroundImage: `url(${imageSlides[currentIndex].img})`}} className='w-full h-full  bg-center bg-cover duration-500'>
+        <div style={{ backgroundImage: `url(${imageSlides[currentIndex].img})`}} className='w-full h-full  bg-center bg-cover duration-500 rounded-3xl'>
         </div>
     </div>
   )

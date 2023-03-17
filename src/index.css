@@ -65,3 +65,38 @@
 .instructions > svg {
   margin-right: 0.25rem;
 }
+
+.link-underline {
+  padding-bottom: 10px;
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#437008
+  , #437008
+  );
+  background-size: 0 3px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .5s ease-in-out;
+}
+
+.link-underline-black {
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#437008
+  , #437008
+  )
+}
+
+.link-underline:hover {
+  background-size: 100% 3px;
+  background-position: 0 100%
+}
+
+.linkOnHere {
+  padding-bottom: 10px;
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#437008
+  , #437008
+  );
+  background-size: 100% 3px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .5s ease-in-out;
+}

@@ -1,168 +1,86 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import axiosInstance from "./axios";
+import axios from "./axios";
 
 export const ProductContext = createContext({})
 
 
 export function ProductProvider({children}){
-    const [name, setName] = useState('')
+    const [selectedId, setSelectedId] = useState('')
+    const [count, setCount] = useState([])
+    const [totalPayment, setTotalPayment] = useState(0)
     const [price, setPrice] = useState('')
-    const [description, setDescription] = useState('')
-    const [stock, setStock] = useState('')
-
+    const [dataDariAPi, setDataDariAPi] = useState([])
+    const [cart, setCart] = useState([])
+    const [idCart, setIdCart] = useState(1)
+    const [kalkulasi, setKalkulasi] = useState()
+    const [hargaTotal, setHargaTotal] = useState(0)
+    const [search, setSearch] = useState('')
     
+    const [typePayment, setTypePayment] = useState(false)
     const [productList, setProductList] = useState([])
     const [dataToko, setDataToko] = useState([])
-
+    const [preview, setPreview] = useState('')
     useEffect(()=>{
         
-        setDataToko([
-            {
-                idToko: 1,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: 'Dapoer Qoe',
-                produk: 27,
-                bergabung: "2 tahun lalu"
-            },{
-                idToko: 2,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Fresh Harvest Market",
-                produk: 123,
-                bergabung: "2 tahun lalu"
-            },{
-                idToko: 3,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Sunshine Produce Co.",
-                produk:11,
-                bergabung: "2 tahun lalu"
-            },{
-                idToko: 4,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Garden Delights Emporium",
-                produk:200,
-                bergabung: "2 tahun lalu"
-            },{
-                idToko: 5,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Farm to Table Market",
-                produk:122,
-                bergabung: "2 tahun lalu"
+        // Ambil data Product dari Backend
+
+        const getData = async ()=>{
+
+            try {
+                const token = localStorage.getItem("Authorization");
+            
+                let config = {
+                    headers: {
+                        Authorization : `Bearer ${token}`
+                    }
+                }
+                const response = await axios.get("/api/v1/user/market/products", config )
+
+                const products = response?.data?.data
+                if ( products) {
+                    setProductList(products)
+                    console.log(productList)
+                }
+                console.log(productList)
+                console.log(productList[0].Category.Name)
+
+
+            } catch (err) {
+                console.log(err)
             }
+        }
+        getData()
 
-
-
-
-
-
-
-
-        ])
-        
-
-        setProductList([
-            {
-                id: 1,
-                category: "Sayur",
-                name: "Bayam",
-                price: 1200,
-                description: "Sayur bayam adalah jenis sayuran hijau yang sangat baik untuk kesehatan. Dengan daun berbentuk hati yang lembut dan sedikit pahit, bayam mengandung banyak nutrisi seperti vitamin A, vitamin C, vitamin K, folat, zat besi, magnesium, dan kalium. Nutrisi ini membuat bayam bermanfaat untuk menjaga kesehatan mata, tulang, dan sistem pencernaan, serta membantu melindungi tubuh dari kerusakan sel dan radikal bebas. Bayam dapat dimasak dengan berbagai cara, seperti direbus, ditumis, atau dijadikan sebagai bahan salad, dan sering dijadikan bahan utama dalam sup atau masakan sayuran lainnya. Dengan kandungan nutrisi yang tinggi dan khasiat kesehatan yang dimilikinya, sayur bayam merupakan pilihan yang baik untuk dimasukkan ke dalam menu makanan sehari-hari.",
-                idtoko: 1,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: 'Dapoer Qoe',
-                produk: 27,
-                bergabung: "2 tahun lalu"
-
-            },
-            {
-                id: 2,
-                category: "Buah",
-                name: "Mangga",
-                price: 20000,
-                description: "Bayam dapat dimasak dengan berbagai cara, seperti direbus, ditumis, atau dijadikan sebagai bahan salad, dan sering dijadikan bahan utama dalam sup atau masakan sayuran lainnya. Dengan kandungan nutrisi yang tinggi dan khasiat kesehatan yang dimilikinya, sayur bayam merupakan pilihan yang baik untuk dimasukkan ke dalam menu makanan sehari-hari.",
-                idtoko: 2,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Fresh Harvest Market",
-                produk: 123,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 3,
-                category: "Sayur",
-                name: "Tomat",
-                price: 10000,
-                description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi", 
-                idToko: 3,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Sunshine Produce Co.",
-                produk:11,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 4,
-                category: "Sayur",
-                name: "Bayam",
-                price: 50000,
-                description: "Bayam merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idToko: 4,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Garden Delights Emporium",
-                produk:200,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 5,
-                category: "Buah",
-                name: "Mangga",
-                price: 20.000,
-                description: "Mangga arum manis yang rasanya kayak jeruk dan banyak zat besi berbahaya terkandung didalamnya",
-                idToko: 5,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Farm to Table Market",
-                produk:122,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 6,
-                category: "Sayur",
-                name: "Tomat",
-                price: 10.000,
-                description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idtoko: 1,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: 'Dapoer Qoe',
-                produk: 27,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 7,
-                category: "Sayur",
-                name: "Apel",
-                price: 10000,
-                description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idtoko: 2,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Fresh Harvest Market",
-                produk: 123,
-                bergabung: "2 tahun lalu"
-            },
-            {
-                id: 8,
-                category: "Sayur",
-                name: "Tomat",
-                price: 10.000,
-                description: "Tomat merupakan sayuran yang tidak mengandung banyak vitamin dan tidak aman dikonsumsi",
-                idToko: 4,
-                location: "https://www.google.com/maps/place/Universitas+Brawijaya/@-7.9526403,112.6143754,15z/data=!4m2!3m1!1s0x0:0xf19b7459bbee5ed5?sa=X&ved=2ahUKEwiv-Z6Roc79AhU7hGMGHTsvAdUQ_BJ6BQiRARAI",
-                namaToko: "Garden Delights Emporium",
-                produk:200,
-                bergabung: "2 tahun lalu"
-            }
-        ])
     },[])
+
+
 
     const productContextValue = {
         productList,
+        count,
+        selectedId,
+        dataToko,
+        setCount,
+        setSelectedId,
         price,
-        dataToko
+        setPrice,
+        cart,
+        setCart,
+        idCart,
+        setIdCart,
+        totalPayment,
+        setTotalPayment,
+        kalkulasi,
+        setKalkulasi,
+        preview,
+        setPreview,
+        hargaTotal,
+        setHargaTotal,
+        typePayment,
+        setTypePayment,
+        search,
+        setSearch
     }
 
     return (
