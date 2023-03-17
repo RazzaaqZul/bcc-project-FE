@@ -19,7 +19,7 @@ const DetailProduct = () => {
 
 
    
-        <div className='px-[200px]'>
+        <div className='mt-[12px] px-[200px]'>
           <SelectedProduct id={id}/>
         </div>
           <Footer></Footer>

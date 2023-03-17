@@ -16,7 +16,7 @@ const ShopDetailCard = ({product}) => {
                 </div>
                 <div className='flex flex-row text-[13px]'>
                     <p className='basis-1/2 font-medium '>Bergabung</p>
-                    <p className='basis-1/2 font-extrabold'>bergabung</p>
+                    <p className='basis-1/2 font-extrabold'>1 bulan yang lalu</p>
                 </div>
             </div>
             <div className='basis-[45%] h-fit  flex flex-row border-[1px] p-2 ml-14 border-green80 rounded-3xl justify-center gap-2'>
