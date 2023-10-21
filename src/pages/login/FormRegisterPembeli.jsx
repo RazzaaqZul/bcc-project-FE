@@ -1,323 +1,361 @@
-import { faCheck, faInfoCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react'
-import axios from '../../api/axios';
-import ButtonAll from '../../components/ButtonAll';
-import styles from '../../style';
-import { aLogoWhite, eyeClose, eyeOpen, google } from '../../assets'
-import ProductList from '../Homepage/ProductList';
-import { Navigate } from 'react-router-dom';
-import axiosInstance from '../../api/axios';
-
+import {
+  faCheck,
+  faInfoCircle,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "../../api/axios";
+import ButtonAll from "../../components/ButtonAll";
+import styles from "../../style";
+import { aLogoWhite, eyeClose, eyeOpen, google } from "../../assets";
+import ProductList from "../Homepage/ProductList";
+import { Navigate } from "react-router-dom";
+import axiosInstance from "../../api/axios";
 
 // Dimulai dari lower atau upper
 // 4-24 characters
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 
-// REQUIRED : satu lower case, satu upper case, satu digits, satu special char 
+// REQUIRED : satu lower case, satu upper case, satu digits, satu special char
 // 8-24 Characters
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 // end point untuk Backend
-const REGISTER_URL = '/api/v1/user/signup'
+const REGISTER_URL = "/api/v1/user/signup";
 
 const FormRegisterPembeli = () => {
-  const errRef = useRef()
-  
-//   Data User Register
-  const [fname, setFname] = useState('')
-  const [email, setEmail] = useState('')
-  const [gender, setGender] = useState('')
-  const [username, setUsername] = useState('')
-  const [address, setAddress] = useState('')
-  const [contact, setContact] = useState('')
+  const errRef = useRef();
 
-// State untuk password Field
-const [password, setPassword] = useState('')
-const [validPassword, setValidPassword] = useState(false)
-const [passwordFocus, setPasswordFocus] = useState(false)
+  //   Data User Register
+  const [fname, setFname] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [username, setUsername] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
 
-// State untuk macth password Field
-const [matchPassword, setMatchPassword] = useState('')
-const [validMatch, setValidMatch] = useState(false)
-const [matchFocus, setMatchFocus] = useState(false)
+  // State untuk password Field
+  const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
 
-// State untuk error message dan success
-const [errMessage, setErrMessage] = useState('')
-const [success, setSuccess] = useState(false)
+  // State untuk macth password Field
+  const [matchPassword, setMatchPassword] = useState("");
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
 
-// Validasi username ketika username di inputkan
-const [validUserName, setValidUserName] = useState(false)
-useEffect(()=>{
-    const result = USERNAME_REGEX.test(username)
-    setValidUserName(result)
-},[username])
+  // State untuk error message dan success
+  const [errMessage, setErrMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
-// Validasi password ketika password di inputkan
-useEffect(()=>{
-    const result = PWD_REGEX.test(password)
-    setValidPassword(result)
+  // Validasi username ketika username di inputkan
+  const [validUserName, setValidUserName] = useState(false);
+  useEffect(() => {
+    const result = USERNAME_REGEX.test(username);
+    setValidUserName(result);
+  }, [username]);
+
+  // Validasi password ketika password di inputkan
+  useEffect(() => {
+    const result = PWD_REGEX.test(password);
+    setValidPassword(result);
 
     // password disandingkan dengan matchPassword
-    const match = password === matchPassword
-    
-    setValidMatch(match)
-}, [password,matchPassword])
+    const match = password === matchPassword;
 
-// Hapus Error Message 
-useEffect(()=>{
-    setErrMessage('')
-},[fname, email,username,password,matchPassword, address, contact])
+    setValidMatch(match);
+  }, [password, matchPassword]);
 
-// state userFocus
-const [userFocus, setUserFocus] = useState(false)
+  // Hapus Error Message
+  useEffect(() => {
+    setErrMessage("");
+  }, [fname, email, username, password, matchPassword, address, contact]);
 
-// handleSubmit & Post API 
-const handleSubmit = async (e) =>{
-    e.preventDefault()
+  // state userFocus
+  const [userFocus, setUserFocus] = useState(false);
 
-    setLoading(true)
+  // handleSubmit & Post API
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    setTimeout(()=>{
-        setLoading(false)
-    }, 2000)
-    
+    setLoading(true);
 
-    try{
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
-        const response = await axios.post('https://gedeindra.aenzt.tech/api/v1/user/signup',JSON.stringify({fname, email, username, gender:"male", password, address, contact}),
-            {
-                headers: {'Content-Type':'application/json'},
-                
-            }
-        )
-        console.log(response.data)
-        console.log(response.accessToken)
-        console.log(JSON.stringify(response))
-        setSuccess(true)
-    } catch (err){
-        if(!err?.response) {
-            setErrMessage(err.message)
-        } else if (err.response?.status === 409){
-            setErrMessage('Username Taken')
-        } else {
-            setErrMessage('Registration Failed')
+    try {
+      const response = await axios.post(
+        "https://gedeindra.aenzt.tech/api/v1/user/signup",
+        JSON.stringify({
+          fname,
+          email,
+          username,
+          gender: "male",
+          password,
+          address,
+          contact,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
         }
-        errRef.current.focus()
-    
+      );
+      console.log(response.data);
+      console.log(response.accessToken);
+      console.log(JSON.stringify(response));
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMessage(err.message);
+      } else if (err.response?.status === 409) {
+        setErrMessage("Username Taken");
+      } else {
+        setErrMessage("Registration Failed");
+      }
+      errRef.current.focus();
     }
-}
-// Password Hide or Show 
+  };
+  // Password Hide or Show
 
-const [type,setType] = useState("password")
+  const [type, setType] = useState("password");
 
-const hidePassword=()=>{
-     if(type === "password"){
-         setType("text")
-     } else {
-         setType("password")
-     }
-}
-
-
-const eyes=() =>{
-    if(type === "password"){
-        return <img src={eyeClose} alt='eyes-close'/>
-     
+  const hidePassword = () => {
+    if (type === "password") {
+      setType("text");
     } else {
-        return <img src={eyeOpen} alt='eyes-open'/>
+      setType("password");
     }
-   }
+  };
 
-   const [loading, setLoading]= useState(false)
+  const eyes = () => {
+    if (type === "password") {
+      return <img src={eyeClose} alt="eyes-close" />;
+    } else {
+      return <img src={eyeOpen} alt="eyes-open" />;
+    }
+  };
 
+  const [loading, setLoading] = useState(false);
 
-    return (
-   <>
-   {success ? (
-   <Navigate to='/login'/>
-   ) : (
-
-    <section >
-        <div className='flex flex-col justify-center font-mulish gap-3'>
-          <div>
-            <h1 className='text-dimGreen text-[35px] font-bold'>Daftar sebagai Pembeli</h1>
-            <p className='font-extrabold text-[18px]'>Daftarkan akun Anda untuk mengakses semua fitur dalam aplikasi</p>
-        </div>
-
-        <p ref={errRef} className={errMessage ? 'errmsg' : "offscreen"} aria-live="assertive">{errMessage}</p> 
-
-        {/* FORM SUBMIT */}
-        <form onSubmit={handleSubmit} className='flex flex-col gap-2 font-bold'>
-            {/* FULL NAME (1) */}
+  return (
+    <>
+      {success ? (
+        <Navigate to="/login" />
+      ) : (
+        <section>
+          <div className="flex flex-col justify-center font-mulish gap-3">
             <div>
-            <label htmlFor='fname'>
-                Nama Lengkap* 
-            </label>
-            <input 
-                type='text'
-                id='fname'
-                name='fname'
-                autoComplete='off'
-                onChange={(e) => setFname(e.target.value)}
-                required
-                value={fname}
-                className={`${styles.input}`}
-            />
+              <h1 className="text-dimGreen text-[35px] font-bold">
+                Daftar sebagai Pembeli
+              </h1>
+              <p className="font-extrabold text-[18px]">
+                Daftarkan akun Anda untuk mengakses semua fitur dalam aplikasi
+              </p>
             </div>
 
-            {/* EMAIL (2) */}
-            <div className='flex flex-col'>
-                <label htmlFor="email">
-                    Email*
-                </label>
-                <input 
-                    type='email'
-                    id='email'
-                    name='email'
-                    autoComplete='off'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className={`${styles.input}`}
+            <p
+              ref={errRef}
+              className={errMessage ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMessage}
+            </p>
+
+            {/* FORM SUBMIT */}
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-2 font-bold"
+            >
+              {/* FULL NAME (1) */}
+              <div>
+                <label htmlFor="fname">Nama Lengkap*</label>
+                <input
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  autoComplete="off"
+                  onChange={(e) => setFname(e.target.value)}
+                  required
+                  value={fname}
+                  className={`${styles.input}`}
                 />
-            </div>
-            {/* USERNAME (3) */}
-            <div>
-                <label htmlFor='username'>
-                    Username:
-                    <span className={`${validUserName ? "valid" : "hidden"}`}>
-                        <FontAwesomeIcon icon={faCheck}/>
-                    </span>
-                    <span className={validUserName || !username ? 'hidden' : "invalid"}>
-                        <FontAwesomeIcon icon={faTimes}/>
-                    </span>
+              </div>
+
+              {/* EMAIL (2) */}
+              <div className="flex flex-col">
+                <label htmlFor="email">Email*</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autoComplete="off"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className={`${styles.input}`}
+                />
+              </div>
+              {/* USERNAME (3) */}
+              <div>
+                <label htmlFor="username">
+                  Username:
+                  <span className={`${validUserName ? "valid" : "hidden"}`}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span
+                    className={
+                      validUserName || !username ? "hidden" : "invalid"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </span>
                 </label>
                 <input
-                    type='text'
-                    id='username'
-                    name='username'
-                    autoComplete='off'
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    aria-invalid={validUserName ? 'false' : 'true'}
-                    aria-describedby = 'uidnote'
-                    onFocus={()=>setUserFocus(true)}
-                    onBlur={() => setUserFocus(false)}
-                    className={`${styles.input}`}
+                  type="text"
+                  id="username"
+                  name="username"
+                  autoComplete="off"
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  aria-invalid={validUserName ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setUserFocus(true)}
+                  onBlur={() => setUserFocus(false)}
+                  className={`${styles.input}`}
                 />
                 {/* Intruksi Pengisian Username */}
-                <p id='uidnote' className={userFocus && username && !validPassword ? "instructions" : "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle}/><br/>
-                    4 to 24 characters. <br/>
-                    Must begin with a letter. <br/>
-                    Letters, numbers, underscores, hypghens allowed.
-
+                <p
+                  id="uidnote"
+                  className={
+                    userFocus && username && !validPassword
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  <br />
+                  4 to 24 characters. <br />
+                  Must begin with a letter. <br />
+                  Letters, numbers, underscores, hypghens allowed.
                 </p>
-            </div>
+              </div>
 
-            {/* PASSWORD (4) */}
-            <div>
-                <label >
-                    Kata Sandi* 
-                    <span className={validPassword ? 'valid' : 'hidden'}>
-                        <FontAwesomeIcon icon={faCheck}/>
-                    </span>
-                    <span className={validPassword || !password ? "hidden" : "invalid"}>
-                        <FontAwesomeIcon icon={faTimes}/>
-                    </span>
+              {/* PASSWORD (4) */}
+              <div>
+                <label>
+                  Kata Sandi*
+                  <span className={validPassword ? "valid" : "hidden"}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span
+                    className={
+                      validPassword || !password ? "hidden" : "invalid"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </span>
                 </label>
-                <div className='relative'>
-                    <input
-                        type={type}
-                        id='password'
-                        name='password'
-                        onChange={(e) =>setPassword(e.target.value)}
-                        required
-                        aria-invalid={validPassword ? 'false' : 'true'}
-                        aria-describedby="passwordNote"
-                        onFocus={() => setPasswordFocus(true)}
-                        onBlur={() => setPasswordFocus(false)}
-                        className={`${styles.input}`}
-                    />
-                     <div className='absolute top-1 right-3'>
-                        <div onClick={hidePassword}>{eyes()}</div>
-                     </div>
+                <div className="relative">
+                  <input
+                    type={type}
+                    id="password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    aria-invalid={validPassword ? "false" : "true"}
+                    aria-describedby="passwordNote"
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)}
+                    className={`${styles.input}`}
+                  />
+                  <div className="absolute top-1 right-3">
+                    <div onClick={hidePassword}>{eyes()}</div>
+                  </div>
                 </div>
-                <p id='passwordNote' className={passwordFocus && !validPassword ? 'instructions' : "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle}/><br/>
-                    9 to 24 characters. <br/>
-                    Must include uppercase and lowercase letters, a number and a special character. <br/>
-                    Allowed special characters:
-                    <span aria-label="exclamation mark">
-                        !
-                    </span>
-                    <span aria-label="at symbol">
-                        @
-                    </span>
-                    <span aria-label="hashtag">
-                        #
-                    </span>
-                    <span aria-label="dollar sign">
-                        $
-                    </span>
-                    <span aria-label="percent">
-                        %
-                    </span>
+                <p
+                  id="passwordNote"
+                  className={
+                    passwordFocus && !validPassword
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  <br />
+                  9 to 24 characters. <br />
+                  Must include uppercase and lowercase letters, a number and a
+                  special character. <br />
+                  Allowed special characters:
+                  <span aria-label="exclamation mark">!</span>
+                  <span aria-label="at symbol">@</span>
+                  <span aria-label="hashtag">#</span>
+                  <span aria-label="dollar sign">$</span>
+                  <span aria-label="percent">%</span>
                 </p>
-            </div>
-            {/* CONFIRM PASSWORD (5) */}
-            <div>
-                <label htmlFor='confirm_password'>
-                    Konfirmasi Kata Sandi
-
-                    <span className={validMatch && matchPassword ? 'valid': "hidden"}>
-                        <FontAwesomeIcon icon={faCheck}/>
-                    </span>
-                    <span className={validMatch || !matchPassword ? "hidden" : "invalid"}>
-                        <FontAwesomeIcon icon={faTimes}/>
-                    </span>
+              </div>
+              {/* CONFIRM PASSWORD (5) */}
+              <div>
+                <label htmlFor="confirm_password">
+                  Konfirmasi Kata Sandi
+                  <span
+                    className={validMatch && matchPassword ? "valid" : "hidden"}
+                  >
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span
+                    className={
+                      validMatch || !matchPassword ? "hidden" : "invalid"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </span>
                 </label>
-                <div className='relative'>
-                    <input 
-                        type={type}
-                        id="confirm_password"
-                        onChange={(e) => { setMatchPassword(e.target.value)}}
-                        required
-                        aria-invalid={validMatch ? "false" : "true"}
-                        aria-describedby = "confirmNote"
-                        onFocus={() => setMatchFocus(true)}
-                        onBlur={() => setMatchFocus(false)}
-                        className={`${styles.input}`}
-                    />
-                     <div className='absolute top-1 right-3 '>
-                        <div onClick={hidePassword}>{eyes()}</div>
-                     </div>
+                <div className="relative">
+                  <input
+                    type={type}
+                    id="confirm_password"
+                    onChange={(e) => {
+                      setMatchPassword(e.target.value);
+                    }}
+                    required
+                    aria-invalid={validMatch ? "false" : "true"}
+                    aria-describedby="confirmNote"
+                    onFocus={() => setMatchFocus(true)}
+                    onBlur={() => setMatchFocus(false)}
+                    className={`${styles.input}`}
+                  />
+                  <div className="absolute top-1 right-3 ">
+                    <div onClick={hidePassword}>{eyes()}</div>
+                  </div>
                 </div>
-                <p id="confirmNote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle}/>
-                    Must match the first password input field
+                <p
+                  id="confirmNote"
+                  className={
+                    matchFocus && !validMatch ? "instructions" : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  Must match the first password input field
                 </p>
-            </div>
-            
-            {/* Address (6) */}
-            <div>
-                <label htmlFor='address'>
-                    Address: 
-                </label>
-                <input 
-                     type='text'
-                     id='address'
-                     name='address'
-                     autoComplete='off'
-                     onChange={(e) => setAddress(e.target.value)}
-                     required
-                     value={address}
-                     className={`${styles.input}`}
-                 />
-            </div>
+              </div>
 
-            {/* Gender
+              {/* Address (6) */}
+              <div>
+                <label htmlFor="address">Address:</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  autoComplete="off"
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                  value={address}
+                  className={`${styles.input}`}
+                />
+              </div>
+
+              {/* Gender
             <div className='flex flex-col'>
                 <label htmlFor='Address'>
                    Gender*
@@ -335,49 +373,60 @@ const eyes=() =>{
                 </select>
             </div> */}
 
-            {/* Contact */}
-            <div>
-                <label htmlFor='contact'>
-                    Nomor Telepon*
-                </label>
-                <input 
-                     type='number'
-                     id='contact'
-                     name='contact'
-                     autoComplete='off'
-                     onChange={(e) => setContact(e.target.value)}
-                     required
-                     value={contact}
-                     className={`${styles.input}`}
-                 />
-            </div>
+              {/* Contact */}
+              <div>
+                <label htmlFor="contact">Nomor Telepon*</label>
+                <input
+                  type="number"
+                  id="contact"
+                  name="contact"
+                  autoComplete="off"
+                  onChange={(e) => setContact(e.target.value)}
+                  required
+                  value={contact}
+                  className={`${styles.input}`}
+                />
+              </div>
 
-            <div className='pt-4 font-normal text-justify text-gray-400 text-[14px]'>
-                <p>Dengan mengklik Daftar, Anda setuju dengan Ketentuan, Kebijakan Privasi, dan Kebijakan Cookie kami. Anda mungkin menerima pemberitahuan SMS dari kami dan dapat memilih keluar kapan saja.</p>
-            </div>
+              <div className="pt-4 font-normal text-justify text-gray-400 text-[14px]">
+                <p>
+                  Dengan mengklik Daftar, Anda setuju dengan Ketentuan,
+                  Kebijakan Privasi, dan Kebijakan Cookie kami. Anda mungkin
+                  menerima pemberitahuan SMS dari kami dan dapat memilih keluar
+                  kapan saja.
+                </p>
+              </div>
 
-            <div className='flex flex-col gap-2'>
+              <div className="flex flex-col gap-2">
                 {/* <ButtonAll disabled={!validUserName || !validMatch || !validPassword ? true :false}>
                     MASUK
                 </ButtonAll> */}
 
-                <ButtonAll >{loading ? <img src={aLogoWhite} className='animate-spin w-6 mx-auto'alt='logo-white'/>: `DAFTAR`}</ButtonAll>
-              
-            </div>
+                <ButtonAll>
+                  {loading ? (
+                    <img
+                      src={aLogoWhite}
+                      className="animate-spin w-6 mx-auto"
+                      alt="logo-white"
+                    />
+                  ) : (
+                    `DAFTAR`
+                  )}
+                </ButtonAll>
+              </div>
+            </form>
 
-        </form>
+            <p className="py-5 font-semibold text-[15px] flex justify-center ">
+              Sudah punya akun?{" "}
+              <a className="font-bold text-dimGreen underline" href="/login">
+                Masuk
+              </a>
+            </p>
+          </div>
+        </section>
+      )}
+    </>
+  );
+};
 
-
-            <p className='py-5 font-semibold text-[15px] flex justify-center '>Sudah punya akun? <a className='font-bold text-dimGreen underline' href='/login'>Masuk</a></p>
-
-        </div>
-    </section>
-
-   )}
-   
-   
-   </>
-  )
-}
-
-export default FormRegisterPembeli
+export default FormRegisterPembeli;

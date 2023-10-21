@@ -8,16 +8,14 @@ import Footer from "./Footer";
 // import Information1 from "./Information1";
 import Information2 from "../pages/landingPage/Information2";
 import Card from "./Card";
-import Loading from "./Loading"
+import Loading from "./Loading";
 
 export {
-    Navbar,
-    Button,
-    Hero,
-    Footer,
-    // Information1,
-    Information2,
-    Card
-}
-
-
+  Navbar,
+  Button,
+  Hero,
+  Footer,
+  // Information1,
+  Information2,
+  Card,
+};
